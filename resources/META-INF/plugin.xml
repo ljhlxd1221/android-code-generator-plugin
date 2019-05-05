@@ -1,0 +1,62 @@
+<idea-plugin>
+    <id>com.rratchet.plugin.code.generator</id>
+    <name>Android Code Generator</name>
+    <version>0.1</version>
+    <vendor email="laijianhua@rratchet.com" url="http://www.rratchet.com">RRatChet</vendor>
+
+    <description><![CDATA[
+      Android Code Generator
+    ]]></description>
+
+    <change-notes><![CDATA[
+      Android Code Generator.<br>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="173.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <projectService serviceInterface="com.rratchet.plugin.code.generator.config.ProjectSettings"
+                        serviceImplementation="com.rratchet.plugin.code.generator.config.ProjectSettings"/>
+        <applicationService
+                serviceInterface="com.rratchet.plugin.code.generator.config.ApplicationSettings"
+                serviceImplementation="com.rratchet.plugin.code.generator.config.ApplicationSettings"/>
+        <applicationConfigurable
+                instance="com.rratchet.plugin.code.generator.config.ApplicationConfigurable"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <group>
+            <separator/>
+            <group id="AndroidCodeGenerator.GenerateAndroidCodeGroup"
+                   text="Generate Android Code"
+                   class="com.rratchet.plugin.code.generator.groups.GenerateAndroidCodeGroup"
+                   popup="true">
+
+                <action id="AndroidCodeGenerator.ViewHolderAction"
+                        class="com.rratchet.plugin.code.generator.actions.ViewHolderAction"
+                        text="ViewHolder" description="Generate View Holder">
+                </action>
+                <!--<action id="AndroidCodeGenerator.ActivityAction"
+                        class="com.rratchet.plugin.code.generator.actions.ActivityAction"
+                        text="Activity" description="Generate Activity Code">
+                </action>-->
+
+                <add-to-group group-id="ProjectViewPopupMenu" anchor="after"
+                              relative-to-action="XmlGenerateToolsGroup"/>
+                <add-to-group group-id="EditorPopupMenu" anchor="after"
+                              relative-to-action="XmlGenerateToolsGroup"/>
+            </group>
+        </group>
+    </actions>
+
+</idea-plugin>
